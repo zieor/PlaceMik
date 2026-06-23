@@ -1,5 +1,5 @@
-html{
-    margin-right: 45px;
-    margin-left: 45px;
-    margin-top:15px ;
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
