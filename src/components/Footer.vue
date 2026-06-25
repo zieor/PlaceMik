@@ -31,7 +31,6 @@
           <router-link to="/acc" class="text-spisok">Сообщить о нарушении авторских прав</router-link>
         </div>
 
-        <!-- Колонка 4: Подписка и соцсети -->
         <div class="subscribe">
           <p class="subscribe-text">Хотите быть в курсе последних новостей и акций?</p>
 
@@ -61,10 +60,9 @@
 
       </div>
 
-      <!-- Нижняя часть: логотип + копирайт -->
       <div class="footer-bottom">
         <div class="logo">
-          <img src="/images/Footer/logo.svg" alt="PlaceMik" width="151px" height="35px" />
+          <img src="/images/Footer/logo.png" alt="PlaceMik" />
         </div>
         <p class="copyright">© PlaceMik.ru, 2021</p>
       </div>
@@ -127,7 +125,7 @@
   opacity: 0.8;
 }
 
-/* --- Подписка --- */
+
 .subscribe {
   display: flex;
   flex-direction: column;
@@ -154,8 +152,8 @@
   font-size: 13px;
   color: white;
   background: transparent;
-  border: none;
-  outline: none;
+  border-color: white;
+  outline-color: white;
   min-width: 0;
 }
 
@@ -180,7 +178,7 @@
   opacity: 0.85;
 }
 
-/* --- Соцсети --- */
+
 .socials-title {
   margin-top: 6px;
 }
@@ -208,19 +206,15 @@
   object-fit: contain;
 }
 
-/* --- Нижняя часть --- */
+
 .footer-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.logo img {
-  height: 40px;
-  object-fit: contain;
-}
+
 
 .copyright {
   font-size: 13px;
@@ -229,13 +223,9 @@
   margin: 0;
 }
 
-@media (max-width: 900px) {
-  .column {
-    flex-direction: column;
-    gap: 30px;
-  }
-  .subscribe {
-    max-width: 100%;
-  }
+.logo{
+  display: flex;
+  justify-content: start;
+
 }
 </style>

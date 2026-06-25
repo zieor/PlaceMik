@@ -3,7 +3,10 @@ import {
   ref,
   onMounted,
   onUnmounted,
-  defineEmits
+  defineEmits,
+  defineExpose,
+  inject,
+  watch
 } from 'vue'
 
 const searchQuery = ref('')
@@ -19,7 +22,27 @@ const filters = ref([
 const selectedFilter = ref(filters.value[0])
 
 const favoritesCount = ref(3)
-const cartCount = ref(2)
+
+// Получаем cartCount и addToCart из provide
+const cartCount = inject('cartCount', ref(0))
+const addToCart = inject('addToCart', () => {})
+
+const isCustomersDropdownOpen = ref(false)
+const isSuppliersDropdownOpen = ref(false)
+
+const customersLinks = ref([
+  { to: '/work', text: 'Как это работает' },
+  { to: '/def', text: 'Защита покупателя' },
+  { to: '/pay', text: 'Условия оплаты' },
+  { to: '/us', text: 'Условия использования' },
+  { to: '/acc', text: 'Регистрация аккаунта' }
+])
+
+const suppliersLinks = ref([
+  { to: '/work', text: 'Как стать продавцом' },
+  { to: '/def', text: 'Правила участия' },
+  { to: '/pay', text: 'Личный кабинет продавца' }
+])
 
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
@@ -39,9 +62,23 @@ const performSearch = () => {
   }
 }
 
+const toggleCustomersDropdown = () => {
+  isCustomersDropdownOpen.value = !isCustomersDropdownOpen.value
+  isSuppliersDropdownOpen.value = false
+}
+
+const toggleSuppliersDropdown = () => {
+  isSuppliersDropdownOpen.value = !isSuppliersDropdownOpen.value
+  isCustomersDropdownOpen.value = false
+}
+
 const handleClickOutside = (event) => {
   if (!event.target.closest('.search-filter-wrapper')) {
     isDropdownOpen.value = false
+  }
+  if (!event.target.closest('.customers-dropdown-wrapper')) {
+    isCustomersDropdownOpen.value = false
+    isSuppliersDropdownOpen.value = false
   }
 }
 
@@ -56,6 +93,16 @@ const handleFavorites = () => {
 const handleCart = () => {
   console.log('Корзина')
 }
+
+// Функция для получения текущего количества товаров
+const getCartCount = () => {
+  return cartCount.value
+}
+
+// Делаем методы доступными для родительского компонента
+defineExpose({
+  getCartCount
+})
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
@@ -72,12 +119,52 @@ const emit = defineEmits(['search'])
   <div class="header-container">
     <div class="Upheader">
       <div class="customers">
-        <div class="customers1">Покупателям</div>
-        <img  src="/images/Header/arrow.svg" alt="catalog" width="10" height="10" style="padding-right: 20px; padding-left: 5px; " />
-        <div class="customers2">Поставщики</div>
-        <img  src="/images/Header/arrow.svg" alt="catalog" width="10" height="10" style="padding-right: 20px; padding-left: 5px; " />
-        <div class="customers3">Частые вопросы</div>
-        <img  src="/images/Header/arrow.svg" alt="catalog" width="10" height="10" style="padding-left: 5px; " />
+        <div class="customers-dropdown-wrapper">
+          <div class="customers1" @click="toggleCustomersDropdown">
+            Покупателям
+            <img src="/images/Header/arrow.svg" alt="catalog" width="10" height="10" style="padding-right: 20px; padding-left: 5px; " />
+          </div>
+
+          <transition name="dropdown">
+            <div v-if="isCustomersDropdownOpen" class="customers-dropdown-menu">
+              <h3 class="dropdown-title">Покупателям</h3>
+              <router-link
+                  v-for="link in customersLinks"
+                  :key="link.to"
+                  :to="link.to"
+                  class="dropdown-link"
+              >
+                {{ link.text }}
+              </router-link>
+            </div>
+          </transition>
+        </div>
+
+        <div class="customers-dropdown-wrapper">
+          <div class="customers2" @click="toggleSuppliersDropdown">
+            Поставщики
+            <img src="/images/Header/arrow.svg" alt="catalog" width="10" height="10" style="padding-right: 20px; padding-left: 5px; " />
+          </div>
+
+          <transition name="dropdown">
+            <div v-if="isSuppliersDropdownOpen" class="customers-dropdown-menu">
+              <h3 class="dropdown-title">Поставщикам</h3>
+              <router-link
+                  v-for="link in suppliersLinks"
+                  :key="link.to"
+                  :to="link.to"
+                  class="dropdown-link"
+              >
+                {{ link.text }}
+              </router-link>
+            </div>
+          </transition>
+        </div>
+
+        <div class="customers3">
+          Частые вопросы
+          <img src="/images/Header/arrow.svg" alt="catalog" width="10" height="10" style="padding-left: 5px; " />
+        </div>
       </div>
 
       <div class="language">
@@ -86,14 +173,14 @@ const emit = defineEmits(['search'])
         <div class="language2">Русский</div>
         <span class="divider">|</span>
         <div class="language2">₽</div>
-        <img  src="/images/Header/arrow.svg" alt="catalog">
+        <img src="/images/Header/arrow.svg" alt="catalog">
       </div>
     </div>
 
     <div class="Botheader">
       <div class="Catalog">
-        <img class="catalog-img" src="/images/Header/catalog.svg" alt="catalog">
-        <img src="/images/Header/PlaceMik.svg" alt="PlaceMik">
+        <img class="catalog-img" src="/images/Header/catalog.png" alt="catalog">
+        <router-link to="/"> <img class="logo1" src="/images/Header/PlaceMik.svg" alt="PlaceMik"></router-link>
         <div class="Place">
           <div class="search-container">
             <div class="search-filter-wrapper">
@@ -141,8 +228,6 @@ const emit = defineEmits(['search'])
         </div>
       </div>
 
-
-
       <div class="Icons">
         <div class="icon-item" @click="handleLogin">
           <img src="/images/Header/login.svg" alt="Войти" class="icon-img">
@@ -160,7 +245,7 @@ const emit = defineEmits(['search'])
         <div class="icon-item" @click="handleCart">
           <div class="icon-wrapper">
             <img src="/images/Header/cart.svg" alt="Корзина" class="icon-img">
-            <span v-if="cartCount > 0" class="icon-badge">{{ cartCount }}</span>
+            <span v-if="cartCount > 0" class="icon-badge cart-badge">{{ cartCount }}</span>
           </div>
           <span class="icon-label">Корзина</span>
         </div>
@@ -181,23 +266,70 @@ const emit = defineEmits(['search'])
   flex-direction: row;
   padding-bottom: 10px;
   margin-top: 20px;
-
 }
 
 .customers {
-  margin: 0 auto;
+  margin: auto auto auto 320px;
   display: flex;
   width: 40%;
   flex-direction: row;
   justify-content: start;
-
   align-items: center;
+}
+
+.customers-dropdown-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.customers1,
+.customers2,
+.customers3 {
+  display: flex;
+  align-items: center;
+}
+
+.customers-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 220px;
+  z-index: 1000;
+  padding: 15px 0;
+}
+
+.dropdown-title {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 20px 10px 20px;
+  margin: 0;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.dropdown-link {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+  font-size: 14px;
+}
+
+.dropdown-link:hover {
+  background: #fdf2f8;
+  color: #9b59b6;
 }
 
 .language {
   display: flex;
   flex-direction: row;
   justify-content: end;
+  align-items: center;
 }
 
 .language1 {
@@ -220,7 +352,6 @@ const emit = defineEmits(['search'])
   display: flex;
   align-items: stretch;
   border: 2px solid #9b59b6;
-  border-radius: 8px;
   overflow: hidden;
   background: white;
   transition: border-color 0.3s;
@@ -335,19 +466,17 @@ const emit = defineEmits(['search'])
 }
 
 .Place {
-display: flex;
+  display: flex;
   align-items: center;
   justify-content: start;
   margin-left: 15px;
   width: 100%;
-
 }
 
 .Icons {
   display: flex;
   flex-direction: row;
   gap: 30px;
-
   align-items: center;
   justify-content: end;
 }
@@ -371,18 +500,30 @@ display: flex;
 
 .icon-badge {
   position: absolute;
-  top: -5px;
-  right: -5px;
+  top: -8px;
+  right: -8px;
   background: #ff4757;
   color: white;
   font-size: 11px;
   font-weight: bold;
-  min-width: 18px;
-  height: 18px;
+  min-width: 20px;
+  height: 20px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cart-badge {
+  background: #ff4757;
+  animation: bounce 0.3s ease;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
 
 .icon-label {
@@ -405,11 +546,13 @@ display: flex;
   width: 100%;
   justify-content: start;
 }
-.catalog-img{
+
+.catalog-img {
   display: flex;
-  padding-bottom: 20px;
+  padding-right: 32px;
 }
-.language{
+
+.language {
   display: flex;
   align-items: center;
 }
