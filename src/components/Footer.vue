@@ -85,10 +85,10 @@
 
 .container {
   width: 100%;
-  max-width: 1366px;
+  max-width: 1286px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 35px;
 }
 
 .column {
@@ -227,5 +227,93 @@
   display: flex;
   justify-content: start;
 
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    padding: 30px 20px;
+  }
+
+  .column {
+    gap: 30px;
+  }
+
+  .spisok {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 25px 15px;
+  }
+
+  .column {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .spisok {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .subscribe {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .subscribe-form {
+    flex-direction: column;
+  }
+
+  .subscribe-input {
+    width: 100%;
+  }
+
+  .subscribe-btn {
+    width: 100%;
+  }
+
+  .socials {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .logo {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 20px 10px;
+  }
+
+  .name-spisok {
+    font-size: 15px;
+  }
+
+  .text-spisok {
+    font-size: 13px;
+  }
+
+  .subscribe-text {
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .socials-title {
+    text-align: center;
+  }
+
+  .copyright {
+    font-size: 12px;
+  }
 }
 </style>

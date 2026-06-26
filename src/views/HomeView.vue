@@ -388,7 +388,7 @@ const handleMouseLeave = () => {
 .main-section {
   max-width: 1366px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 20px 0;
 }
 
 /* ===== БАННЕРЫ ===== */
@@ -771,9 +771,10 @@ const handleMouseLeave = () => {
 
 /* ===== РАНЕЕ ПРОСМОТРЕННЫЕ ===== */
 .viewed-section {
-  margin-top: 40px;
+  margin: 0 auto;
   padding: 40px;
-  background: linear-gradient(135deg, #f8f4fc 0%, #f0e8f8 100%);
+  background: linear-gradient(135deg, #f6cbcb 0%, #bec2f6 100%);
+
 }
 
 .viewed-section .section-title {
@@ -865,8 +866,11 @@ const handleMouseLeave = () => {
   color: #9b59b6;
 }
 
-/* ===== АДАПТИВ ===== */
 @media (max-width: 1200px) {
+  .main-section {
+    padding: 15px;
+  }
+
   .products-grid,
   .recommended-grid {
     grid-template-columns: repeat(4, 1fr);
@@ -879,8 +883,17 @@ const handleMouseLeave = () => {
   .viewed-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .banners-container {
+    gap: 15px;
+  }
+
+  .side-banners {
+    width: 280px;
+  }
 }
 
+/* Tablets */
 @media (max-width: 1024px) {
   .banners-container {
     grid-template-columns: 1fr;
@@ -889,24 +902,38 @@ const handleMouseLeave = () => {
   .side-banners {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 15px;
+    width: 100%;
   }
 
   .banner-item.side {
+    height: 160px;
     margin-bottom: 0;
-    height: 180px;
+  }
+
+  .main-banner-wrapper {
+    margin-bottom: 15px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .info-title {
+    font-size: 26px;
   }
 
   .shops-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .viewed-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
+/* Large phones */
 @media (max-width: 768px) {
+  .main-section {
+    padding: 10px;
+  }
+
   .products-grid,
   .recommended-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -921,35 +948,85 @@ const handleMouseLeave = () => {
     height: 220px;
   }
 
-  .sale-section {
-    padding-bottom: 20px;
+  .banner-item.side {
+    height: 180px;
+  }
+
+  .banner-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .banner-arrow svg {
+    width: 16px;
+    height: 16px;
   }
 
   .shops-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .shop-card {
+    padding: 20px 10px;
   }
 
   .viewed-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .viewed-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .viewed-image {
+    width: 100%;
+  }
+
+  .viewed-name {
+    -webkit-line-clamp: 2;
   }
 
   .info-section {
-    padding: 24px 0;
+    padding: 30px 0;
   }
 
   .info-title {
-    font-size: 24px;
+    font-size: 22px;
+  }
+
+  .info-content p {
+    font-size: 14px;
+    line-height: 1.6;
   }
 
   .viewed-section {
-    padding: 24px;
+    padding: 30px 15px;
+  }
+
+  .product-card.is-hovered {
+    transform: scale(1.05);
+  }
+
+  .product-info-expanded {
+    padding: 10px;
+  }
+
+  .add-to-cart-btn {
+    padding: 10px;
+    font-size: 14px;
   }
 }
 
+/* Small phones */
 @media (max-width: 480px) {
   .products-grid,
   .recommended-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 8px;
   }
 
   .shops-grid,
@@ -957,8 +1034,79 @@ const handleMouseLeave = () => {
     grid-template-columns: 1fr;
   }
 
-  .main-section {
-    padding: 10px;
+  .banner-item.main {
+    height: 180px;
+  }
+
+  .banner-item.side {
+    height: 140px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .product-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .current-price {
+    font-size: 16px;
+  }
+
+  .old-price {
+    font-size: 12px;
+  }
+
+  .product-name-short {
+    font-size: 12px;
+  }
+
+  .view-all-btn {
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+
+  .shop-brand {
+    font-size: 14px;
+  }
+
+  .info-section {
+    padding: 20px 0;
+  }
+
+  .info-title {
+    font-size: 20px;
+  }
+
+  .info-content p {
+    font-size: 13px;
+  }
+
+  .viewed-section {
+    padding: 20px 10px;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+  .products-grid,
+  .recommended-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .banner-item.main {
+    height: 160px;
+  }
+
+  .banner-item.side {
+    height: 120px;
+  }
+
+  .product-image {
+    min-height: 140px;
   }
 }
 </style>
