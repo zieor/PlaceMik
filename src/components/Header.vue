@@ -96,7 +96,6 @@ const megaMenuData = ref([
   }
 ])
 
-// Баннеры
 const banners = ref([])
 const currentBannerIndex = ref(0)
 
@@ -144,7 +143,6 @@ const closeAll = () => {
   isMegaMenuOpen.value = false
 }
 
-// Навигация по баннерам
 const nextBanner = () => {
   if (banners.value.length > 0) {
     currentBannerIndex.value = (currentBannerIndex.value + 1) % banners.value.length
@@ -193,7 +191,6 @@ defineExpose({
 onMounted(async () => {
   document.addEventListener('click', handleClickOutside)
 
-  // Загрузка баннеров
   try {
     const bannersRes = await fetch('/data/banners.json')
     const bannersData = await bannersRes.json()
@@ -257,11 +254,9 @@ const emit = defineEmits(['search'])
       <div class="Catalog" style="position: relative;">
         <img class="catalog-img" src="/images/Header/catalog.png" alt="catalog" @click="toggleCatalog" style="cursor: pointer;">
 
-        <!-- Выпадающее меню каталога -->
         <transition name="catalog-dropdown">
           <div v-if="isCatalogOpen" class="catalog-dropdown-menu" :class="{ 'mega-open': isMegaMenuOpen }">
 
-            <!-- Левая панель со списком категорий -->
             <div class="catalog-sidebar">
               <div class="catalog-header">
                 <div class="catalog-dots">
@@ -383,7 +378,6 @@ const emit = defineEmits(['search'])
               </div>
             </div>
 
-            <!-- Мега-меню со всеми подкатегориями -->
             <transition name="mega-menu">
               <div v-if="isMegaMenuOpen" class="mega-menu-content">
                 <div class="mega-menu-grid">
@@ -401,7 +395,6 @@ const emit = defineEmits(['search'])
                   </div>
                 </div>
 
-                <!-- Баннер на всю ширину -->
                 <div class="mega-banner-full">
                   <button class="mega-banner-arrow mega-banner-arrow-left" @click="prevBanner">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -693,7 +686,6 @@ const emit = defineEmits(['search'])
   transform: translateY(-10px);
 }
 
-/* ===== КАТАЛОГ DROPDOWN ===== */
 .catalog-dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -834,7 +826,6 @@ const emit = defineEmits(['search'])
   transition: transform 0.3s ease;
 }
 
-/* ===== МЕГА-МЕНЮ ===== */
 .mega-menu-content {
   flex: 1;
   padding: 24px 30px;
@@ -887,7 +878,6 @@ const emit = defineEmits(['search'])
   color: #9b59b6;
 }
 
-/* ===== БАННЕР НА ВСЮ ШИРИНУ ===== */
 .mega-banner-full {
   position: relative;
   width: 100%;
@@ -1071,6 +1061,7 @@ const emit = defineEmits(['search'])
   display: flex;
   align-items: center;
 }
+
 @media (max-width: 1024px) {
   .header-container {
     padding: 0 15px;
@@ -1217,6 +1208,245 @@ const emit = defineEmits(['search'])
     min-width: 16px;
     height: 16px;
     padding: 0 4px;
+  }
+}
+
+@media (max-width: 375px) {
+  .header-container {
+    padding: 0 10px;
+  }
+
+  .Upheader {
+    padding-bottom: 6px;
+    margin-top: 6px;
+    gap: 4px;
+  }
+
+  .customers {
+    gap: 8px;
+  }
+
+  .customers1,
+  .customers2 {
+    font-size: 11px;
+  }
+
+  .customers1 img,
+  .customers2 img {
+    width: 8px;
+    height: 8px;
+    padding-left: 3px;
+    padding-right: 10px;
+  }
+
+  .language {
+    font-size: 11px;
+  }
+
+  .language1 {
+    width: 16px;
+    height: 16px;
+    padding-right: 4px;
+  }
+
+  .language2 {
+    font-size: 11px;
+  }
+
+  .divider {
+    margin: 0 1px;
+  }
+
+  .language img {
+    width: 8px;
+    height: 8px;
+  }
+
+  .Botheader {
+    gap: 8px;
+  }
+
+  .catalog-img {
+    width: 20px;
+    height: 20px;
+    padding-right: 8px;
+  }
+
+  .logo1 {
+    max-width: 80px;
+    height: auto;
+  }
+
+  .Place {
+    margin-left: 8px;
+  }
+
+  .search-filter {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+
+  .search-filter-text {
+    margin-right: 4px;
+  }
+
+  .search-filter-arrow {
+    font-size: 8px;
+  }
+
+  .search-input {
+    padding: 7px 8px;
+    font-size: 12px;
+  }
+
+  .search-button {
+    padding: 7px 10px;
+  }
+
+  .search-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .Icons {
+    gap: 10px;
+  }
+
+  .icon-img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .icon-badge {
+    font-size: 8px;
+    min-width: 14px;
+    height: 14px;
+    top: -5px;
+    right: -5px;
+    padding: 0 3px;
+  }
+
+  .catalog-dropdown-menu {
+    left: -5px;
+  }
+
+  .catalog-dropdown-menu.mega-open {
+    left: -10px;
+    max-width: calc(100vw - 20px);
+  }
+
+  .catalog-sidebar {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .catalog-header {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .catalog-title {
+    font-size: 13px;
+  }
+
+  .catalog-dots span {
+    width: 3px;
+    height: 3px;
+  }
+
+  .catalog-item {
+    padding: 8px 14px;
+    gap: 10px;
+  }
+
+  .catalog-icon-svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .catalog-name {
+    font-size: 12px;
+  }
+
+  .catalog-list {
+    max-height: 400px;
+  }
+
+  .catalog-footer {
+    padding: 10px 14px;
+  }
+
+  .all-categories-btn {
+    font-size: 12px;
+  }
+
+  .all-categories-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .mega-menu-content {
+    padding: 12px;
+    min-width: 0;
+  }
+
+  .mega-menu-grid {
+    gap: 12px;
+  }
+
+  .mega-menu-title {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .mega-menu-link {
+    font-size: 12px;
+  }
+
+  .mega-banner-item-full {
+    height: 100px;
+  }
+
+  .mega-banner-arrow {
+    width: 28px;
+    height: 28px;
+  }
+
+  .mega-banner-arrow svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .mega-banner-arrow-left {
+    left: 6px;
+  }
+
+  .mega-banner-arrow-right {
+    right: 6px;
+  }
+
+  .customers-dropdown-menu {
+    min-width: 170px;
+  }
+
+  .dropdown-title {
+    font-size: 13px;
+    padding: 0 12px 6px 12px;
+    margin-bottom: 6px;
+  }
+
+  .dropdown-link {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .dropdown-menu {
+    min-width: 150px;
+  }
+
+  .dropdown-item {
+    padding: 8px 14px;
+    font-size: 12px;
   }
 }
 </style>

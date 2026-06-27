@@ -59,7 +59,6 @@ const handleMouseLeave = () => {
 
 <template>
   <div class="main-section">
-    <!-- Баннеры -->
     <div class="banners-container">
       <div class="main-banner-wrapper">
         <button class="banner-arrow banner-arrow-left">
@@ -94,7 +93,6 @@ const handleMouseLeave = () => {
       </div>
     </div>
 
-    <!-- Секция "Успей купить" -->
     <div class="products-section sale-section">
       <h2 class="section-title">Успей купить</h2>
 
@@ -162,7 +160,6 @@ const handleMouseLeave = () => {
       </div>
     </div>
 
-    <!-- Секция "Новинки" -->
     <div class="products-section new-section" v-if="newProducts.length > 0">
       <h2 class="section-title">Новинки</h2>
 
@@ -230,7 +227,6 @@ const handleMouseLeave = () => {
       </div>
     </div>
 
-    <!-- Секция "Магазины для вас" -->
     <div class="products-section shops-section" v-if="shops.length > 0">
       <div class="section-header">
         <h2 class="section-title">Магазины для вас</h2>
@@ -267,7 +263,6 @@ const handleMouseLeave = () => {
       </div>
     </div>
 
-    <!-- Секция "Рекомендуемые для вас товары" -->
     <div class="products-section recommended-section" v-if="recommendedProducts.length > 0">
       <h2 class="section-title">Рекомендуемые для вас товары</h2>
 
@@ -335,7 +330,6 @@ const handleMouseLeave = () => {
       </div>
     </div>
 
-    <!-- Секция "Широкий ассортимент и высокое качество" -->
     <div class="info-section">
       <h2 class="info-title">Широкий ассортимент и высокое качество</h2>
 
@@ -354,7 +348,6 @@ const handleMouseLeave = () => {
       </div>
     </div>
 
-    <!-- Секция "Ранее вы смотрели" -->
     <div class="products-section viewed-section" v-if="viewedProducts.length > 0">
       <h2 class="section-title">Ранее вы смотрели</h2>
 
@@ -391,7 +384,6 @@ const handleMouseLeave = () => {
   padding: 20px 20px 0;
 }
 
-/* ===== БАННЕРЫ ===== */
 .banners-container {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -467,7 +459,6 @@ const handleMouseLeave = () => {
   right: 16px;
 }
 
-/* ===== СЕКЦИИ ТОВАРОВ ===== */
 .products-section {
   margin-top: 40px;
   padding-top: 20px;
@@ -535,7 +526,6 @@ const handleMouseLeave = () => {
   grid-template-columns: repeat(6, 1fr);
 }
 
-/* ===== КАРТОЧКА ТОВАРА ===== */
 .product-card {
   position: relative;
   background: white;
@@ -690,7 +680,6 @@ const handleMouseLeave = () => {
   opacity: 0.9;
 }
 
-/* ===== СЕТКА МАГАЗИНОВ ===== */
 .shops-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -744,7 +733,6 @@ const handleMouseLeave = () => {
   display: block;
 }
 
-/* ===== СЕКЦИЯ ИНФОРМАЦИИ ===== */
 .info-section {
   margin-top: 60px;
   padding: 40px 0;
@@ -769,12 +757,10 @@ const handleMouseLeave = () => {
   text-align: justify;
 }
 
-/* ===== РАНЕЕ ПРОСМОТРЕННЫЕ ===== */
 .viewed-section {
-  margin: 0 auto;
+  margin: 40px auto 0;
   padding: 40px;
   background: linear-gradient(135deg, #f6cbcb 0%, #bec2f6 100%);
-
 }
 
 .viewed-section .section-title {
@@ -842,7 +828,6 @@ const handleMouseLeave = () => {
   color: #1a1a1a;
 }
 
-/* ===== КНОПКА "ВСЕ ТОВАРЫ" ===== */
 .view-all-wrapper {
   display: flex;
   justify-content: flex-end;
@@ -893,26 +878,59 @@ const handleMouseLeave = () => {
   }
 }
 
-/* Tablets */
-@media (max-width: 1024px) {
+@media (max-width: 992px) {
+  .products-grid,
+  .recommended-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .shops-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .viewed-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .banners-container {
     grid-template-columns: 1fr;
   }
 
   .side-banners {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     width: 100%;
   }
 
-  .banner-item.side {
-    height: 160px;
+  .side-banners .banner-item.side {
     margin-bottom: 0;
+    height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-grid,
+  .recommended-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .main-banner-wrapper {
-    margin-bottom: 15px;
+  .shops-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .viewed-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .viewed-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .viewed-image {
+    width: 100%;
+    margin-bottom: 10px;
   }
 
   .section-title {
@@ -920,126 +938,72 @@ const handleMouseLeave = () => {
   }
 
   .info-title {
-    font-size: 26px;
-  }
-
-  .shops-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Large phones */
-@media (max-width: 768px) {
-  .main-section {
-    padding: 10px;
-  }
-
-  .products-grid,
-  .recommended-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    font-size: 24px;
   }
 
   .side-banners {
-    grid-template-columns: 1fr;
+    display: none;
   }
+}
 
-  .banner-item.main {
-    height: 220px;
-  }
-
-  .banner-item.side {
-    height: 180px;
-  }
-
-  .banner-arrow {
-    width: 36px;
-    height: 36px;
-  }
-
-  .banner-arrow svg {
-    width: 16px;
-    height: 16px;
+@media (max-width: 480px) {
+  .products-grid,
+  .recommended-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
   .shops-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
 
-  .shop-card {
-    padding: 20px 10px;
+  .product-image {
+    min-height: 130px;
   }
 
-  .viewed-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+  .product-image img {
+    max-height: 110px;
   }
 
-  .viewed-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 12px;
+  .current-price {
+    font-size: 15px;
   }
 
-  .viewed-image {
-    width: 100%;
+  .old-price {
+    font-size: 11px;
   }
 
-  .viewed-name {
-    -webkit-line-clamp: 2;
-  }
-
-  .info-section {
-    padding: 30px 0;
-  }
-
-  .info-title {
-    font-size: 22px;
-  }
-
-  .info-content p {
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  .viewed-section {
-    padding: 30px 15px;
-  }
-
-  .product-card.is-hovered {
-    transform: scale(1.05);
-  }
-
-  .product-info-expanded {
-    padding: 10px;
-  }
-
-  .add-to-cart-btn {
-    padding: 10px;
-    font-size: 14px;
+  .product-name-short {
+    font-size: 12px;
   }
 }
 
-/* Small phones */
-@media (max-width: 480px) {
-  .products-grid,
-  .recommended-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  .shops-grid,
-  .viewed-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 375px) {
+  .main-section {
+    padding: 10px 10px 0;
   }
 
   .banner-item.main {
-    height: 180px;
+    height: 160px;
   }
 
-  .banner-item.side {
-    height: 140px;
+  .banner-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .banner-arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .banner-arrow-left {
+    left: 10px;
+  }
+
+  .banner-arrow-right {
+    right: 10px;
   }
 
   .section-title {
@@ -1047,66 +1011,117 @@ const handleMouseLeave = () => {
     margin-bottom: 16px;
   }
 
+  .products-grid,
+  .recommended-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .product-card.is-hovered {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-card.is-hovered .product-info-default {
+    display: flex;
+  }
+
+  .product-card.is-hovered .product-info-expanded {
+    display: none !important;
+  }
+
+  .product-image {
+    min-height: 100px;
+  }
+
+  .product-image img {
+    max-height: 85px;
+  }
+
   .product-badge {
+    padding: 2px 6px;
     font-size: 10px;
-    padding: 3px 8px;
+    top: 6px;
+    right: 6px;
+  }
+
+  .product-info-default {
+    padding: 8px;
   }
 
   .current-price {
-    font-size: 16px;
+    font-size: 13px;
   }
 
   .old-price {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .product-name-short {
-    font-size: 12px;
+    font-size: 11px;
+    line-height: 1.3;
   }
 
-  .view-all-btn {
-    padding: 10px 24px;
-    font-size: 14px;
+  .shops-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .shop-card {
+    padding: 15px 8px;
   }
 
   .shop-brand {
-    font-size: 14px;
+    font-size: 11px;
   }
 
   .info-section {
+    margin-top: 30px;
     padding: 20px 0;
   }
 
   .info-title {
-    font-size: 20px;
+    font-size: 18px;
+    margin-bottom: 12px;
   }
 
   .info-content p {
     font-size: 13px;
+    text-align: left;
+    line-height: 1.6;
   }
 
   .viewed-section {
-    padding: 20px 10px;
-  }
-}
-
-/* Extra small phones */
-@media (max-width: 360px) {
-  .products-grid,
-  .recommended-grid {
-    grid-template-columns: 1fr;
+    margin-top: 20px;
+    padding: 20px 12px;
   }
 
-  .banner-item.main {
-    height: 160px;
+  .viewed-card {
+    padding: 12px;
+    gap: 12px;
   }
 
-  .banner-item.side {
-    height: 120px;
+  .viewed-image img {
+    max-height: 90px;
   }
 
-  .product-image {
-    min-height: 140px;
+  .viewed-name {
+    font-size: 12px;
+  }
+
+  .viewed-price {
+    font-size: 13px;
+  }
+
+  .view-all-wrapper {
+    justify-content: center;
+  }
+
+  .view-all-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+    width: 100%;
+    text-align: center;
   }
 }
 </style>
