@@ -2,88 +2,88 @@
   "banners": [
     {
       "id": 1,
-      "image": "/images/banners/app-promo.png"
+      "image": "images/banners/app-promo.png"
     }
   ],
   "sideBanners": [
     {
       "id": 1,
-      "image": "/images/banners/inhaler.png"
+      "image": "images/banners/inhaler.png"
     },
     {
       "id": 2,
-      "image": "/images/banners/ingavirin.png"
+      "image": "images/banners/ingavirin.png"
     }
   ],
   "shops": [
     {
       "id": 1,
       "type": "shop",
-      "logo": "/images/shops/marple-logo.png"
+      "logo": "images/shops/marple-logo.png"
     },
     {
       "id": 2,
       "type": "shop",
 
-      "logo": "/images/shops/huawei-logo.png"
+      "logo": "images/shops/huawei-logo.png"
     },
     {
       "id": 3,
       "type": "shop",
 
-      "logo": "/images/shops/berlingo-logo.png"
+      "logo": "images/shops/berlingo-logo.png"
     },
     {
       "id": 4,
       "type": "shop",
-      "logo": "/images/shops/promo-animals.png"
+      "logo": "images/shops/promo-animals.png"
     },
     {
       "id": 5,
       "type": "shop",
 
-      "logo": "/images/shops/ukwai-logo.png"
+      "logo": "images/shops/ukwai-logo.png"
     },
     {
       "id": 6,
       "type": "shop",
 
-      "logo": "/images/shops/lassie-logo.png"
+      "logo": "images/shops/lassie-logo.png"
     },
     {
       "id": 7,
       "type": "shop",
 
-      "logo": "/images/shops/densel-logo.png"
+      "logo": "images/shops/densel-logo.png"
     },
     {
       "id": 8,
       "type": "shop",
-      "logo": "/images/banners/promo-sale.png"
+      "logo": "images/banners/promo-sale.png"
     },
     {
       "id": 9,
       "type": "shop",
 
-      "logo": "/images/shops/cuess-logo.png"
+      "logo": "images/shops/cuess-logo.png"
     },
     {
       "id": 10,
       "type": "shop",
 
-      "logo": "/images/shops/huawei-logo.png"
+      "logo": "images/shops/huawei-logo.png"
     },
     {
       "id": 11,
       "type": "shop",
 
-      "logo": "/images/shops/densel-logo.png"
+      "logo": "images/shops/densel-logo.png"
     },
     {
       "id": 12,
       "type": "shop",
 
-      "logo": "/images/shops/ukwai-logo.png"
+      "logo": "images/shops/ukwai-logo.png"
     }
   ]
 }
